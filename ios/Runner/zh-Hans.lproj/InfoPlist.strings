@@ -1,0 +1,5 @@
+/* Face ID 使用说明 */
+NSFaceIDUsageDescription = "SafeKey 使用 Face ID 快速解锁密码本，保护您的隐私安全。";
+
+/* 相册（文件选择器或第三方 SDK 可能引用系统相册接口） */
+NSPhotoLibraryUsageDescription = "当您从相册选择照片或媒体时（例如通过文件选择器导入备份或附件），SafeKey 需要访问您的照片图库。";

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 发布方式：app-store / ad-hoc / enterprise / development -->
+	<key>method</key>
+	<string>app-store</string>
+
+	<!-- 你的 Apple Developer Team ID（10位字母数字，在开发者后台可查） -->
+	<key>teamID</key>
+	<string>WMKE6PQLTZ</string>
+
+	<!-- 签名方式：automatic（让 Xcode 自动管理）或 manual -->
+	<key>signingStyle</key>
+	<string>automatic</string>
+
+	<!-- 是否上传调试符号（建议开启，方便 Crashlytics 解析崩溃） -->
+	<key>uploadSymbols</key>
+	<true/>
+
+	<!-- 是否压缩 bitcode（App Store 上传一般无需 bitcode） -->
+	<key>compileBitcode</key>
+	<false/>
+
+	<!-- 是否在导出时剥离 Swift 标准库（通常 false） -->
+	<key>stripSwiftSymbols</key>
+	<true/>
+
+	<!--
+	  如果你使用手动签名，取消注释并填写 Provisioning Profile 名称：
+	  <key>provisioningProfiles</key>
+	  <dict>
+	    <key>com.safekey.safeKey</key>
+	    <string>SafeKey AppStore Distribution</string>
+	  </dict>
+	-->
+</dict>
+</plist>

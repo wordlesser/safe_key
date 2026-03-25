@@ -1,0 +1,78 @@
+name: safe_key
+description: "SafeKey — 本地密码本，全离线加密存储的个人密码管理工具"
+publish_to: 'none'
+
+version: 1.0.1+2
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+  cupertino_icons: ^1.0.8
+
+  # 安全存储（Keychain/Keystore）
+  flutter_secure_storage: ^10.0.0
+
+  # AES-256 加密（基于 PointyCastle）
+  encrypt: ^5.0.3
+
+  # PointyCastle 用于 PBKDF2 密钥派生
+  pointycastle: ^3.9.1
+
+  # SQLite 数据库
+  sqflite: ^2.4.2
+  path: ^1.9.0
+
+  # 文件路径
+  path_provider: ^2.1.5
+
+  # 生物识别（Face ID / Touch ID）
+  local_auth: ^2.3.0
+
+  # 状态管理
+  provider: ^6.1.2
+
+  # UUID 生成
+  uuid: ^4.5.1
+
+  # 文件分享（备份导出）
+  share_plus: ^12.0.1
+
+  # 文件选择（备份导入）
+  file_picker: ^8.3.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/icon/
+    - pubspec.yaml
+
+flutter_launcher_icons:
+  # ── iOS ────────────────────────────────────────────────────────────────
+  ios: true
+  image_path_ios: "assets/icon/app_icon.png"
+  remove_alpha_ios: true          # iOS 图标不允许透明通道
+
+  # ── Android ────────────────────────────────────────────────────────────
+  android: true
+  image_path_android: "assets/icon/app_icon.png"
+
+  # 自适应图标（Android 8.0+）
+  adaptive_icon_background: "#5856D6"
+  adaptive_icon_foreground: "assets/icon/app_icon_fg.png"
+
+  # ── 通用 ───────────────────────────────────────────────────────────────
+  min_sdk_android: 21             # 与项目 minSdk 保持一致

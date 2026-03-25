@@ -1,0 +1,5 @@
+/* Face ID usage description */
+NSFaceIDUsageDescription = "SafeKey uses Face ID to quickly unlock your password vault and protect your privacy.";
+
+/* Photo library (file picker / SDK may reference PHPhotoLibrary) */
+NSPhotoLibraryUsageDescription = "SafeKey needs access to your photo library when you choose photos or media from the library (for example via the file picker to import backups or attachments).";

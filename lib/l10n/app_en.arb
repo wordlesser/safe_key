@@ -1,0 +1,280 @@
+{
+  "@@locale": "en",
+
+  "appName": "SafeKey",
+
+  "welcomeSlide1Title": "Offline Encrypted Storage",
+  "welcomeSlide1Subtitle": "All data is encrypted with AES-256-GCM\nstored locally on your device, never online",
+  "welcomeSlide2Title": "Face ID / Touch ID",
+  "welcomeSlide2Subtitle": "Unlock quickly with biometrics\nno need to enter master password each time",
+  "welcomeSlide3Title": "No Registration, No Internet",
+  "welcomeSlide3Subtitle": "Your data belongs only to you\nthe app requires no network permissions",
+  "getStarted": "Get Started",
+  "nextStep": "Next",
+
+  "setupMasterPasswordTitle": "Set Master Password",
+  "setupFailed": "Setup failed, please try again",
+  "masterPasswordIsYourOnly": "Master password is your only safeguard",
+  "masterPasswordWarning": "The master password cannot be recovered. Please remember it. We recommend using a combination of upper/lowercase letters, numbers and symbols.",
+  "masterPassword": "Master Password",
+  "atLeast6CharsHint": "At least 6 characters",
+  "enterMasterPasswordError": "Please enter master password",
+  "masterPasswordTooShortError": "Master password must be at least 6 characters",
+  "confirmMasterPassword": "Confirm Master Password",
+  "reEnterMasterPasswordHint": "Re-enter master password",
+  "confirmMasterPasswordError": "Please confirm master password",
+  "passwordMismatchError": "Passwords do not match",
+  "completeSetup": "Complete Setup",
+
+  "lockedOutMessage": "Wrong password {count} times, locked for {minutes} minutes",
+  "@lockedOutMessage": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "passwordWrongRemaining": "Wrong password, {remaining} attempts remaining",
+  "@passwordWrongRemaining": {
+    "placeholders": {
+      "remaining": { "type": "int" }
+    }
+  },
+  "durationMinSec": "{m}m {s}s",
+  "@durationMinSec": {
+    "placeholders": {
+      "m": { "type": "int" },
+      "s": { "type": "int" }
+    }
+  },
+  "durationSec": "{s}s",
+  "@durationSec": {
+    "placeholders": {
+      "s": { "type": "int" }
+    }
+  },
+  "enterMasterPasswordToUnlock": "Enter master password to unlock",
+  "failedAttemptsWarning": "Failed {failed} times, locked after {remaining} more wrong attempts (30 min)",
+  "@failedAttemptsWarning": {
+    "placeholders": {
+      "failed": { "type": "int" },
+      "remaining": { "type": "int" }
+    }
+  },
+  "unlock": "Unlock",
+  "useFaceIdTouchId": "Use Face ID / Touch ID",
+  "appLockedHint": "Your vault is locked",
+  "tapToUnlockBiometric": "Tap to unlock",
+  "verifying": "Verifying…",
+  "usePasswordInstead": "Use password instead",
+  "switchToFaceId": "Use Face ID",
+  "biometricFailedHint": "Failed {count} time(s), {left} more failure(s) will switch to password",
+  "@biometricFailedHint": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "left": { "type": "int" }
+    }
+  },
+  "biometricFailedAutoSwitched": "Face ID failed, switched to password unlock",
+  "accountLocked": "Account Locked",
+  "accountLockedDesc": "Too many wrong passwords (5 times), account is temporarily locked",
+  "remainingTime": "Remaining: {time}",
+  "@remainingTime": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "addPasswordTooltip": "Add Password",
+  "searchHint": "Search name, account, notes...",
+  "allCategories": "All",
+  "copyUsername": "Copy Username",
+  "copyPassword": "Copy Password",
+  "edit": "Edit",
+  "delete": "Delete",
+  "deleteConfirmTitle": "Confirm Delete",
+  "deleteConfirmContent": "Delete password record for \"{name}\"? This cannot be undone.",
+  "@deleteConfirmContent": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "deleteConfirmContentShort": "Delete \"{name}\"? This cannot be undone.",
+  "@deleteConfirmContentShort": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "cancel": "Cancel",
+  "deletedEntry": "Deleted \"{name}\"",
+  "@deletedEntry": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "noMatchingPasswords": "No matching passwords found",
+  "noPasswordsYet": "No passwords yet",
+  "tryOtherKeywords": "Try other keywords",
+  "tapPlusToAdd": "Tap + to add your first password",
+  "addPassword": "Add Password",
+
+  "editPassword": "Edit Password",
+  "save": "Save",
+  "savedEntry": "Saved \"{name}\"",
+  "@savedEntry": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "updatedEntry": "Updated \"{name}\"",
+  "@updatedEntry": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "saveFailed": "Save failed, please try again",
+  "nameLabel": "Name *",
+  "nameHint": "e.g. Twitter, Gmail",
+  "nameRequired": "Please enter a name",
+  "usernameLabel": "Account / Username *",
+  "usernameHint": "Phone, email or username",
+  "usernameRequired": "Please enter account",
+  "passwordLabel": "Password *",
+  "passwordHint": "Enter or generate password",
+  "generatorTooltip": "Password Generator",
+  "passwordRequired": "Please enter password",
+  "urlLabel": "URL (optional)",
+  "noteLabel": "Note (optional)",
+  "noteHint": "Other info...",
+  "categoryLabel": "Category",
+
+  "editTooltip": "Edit",
+  "deleteTooltip": "Delete",
+  "usernameFieldLabel": "Account",
+  "passwordFieldLabel": "Password",
+  "urlFieldLabel": "URL",
+  "noteFieldLabel": "Note",
+  "createdAt": "Created",
+  "updatedAt": "Updated",
+
+  "passwordGenerator": "Password Generator",
+  "length": "Length",
+  "uppercase": "Uppercase",
+  "lowercase": "Lowercase",
+  "digits": "Digits",
+  "specialChars": "Special Characters",
+  "regenerate": "Regenerate",
+  "useThisPassword": "Use This Password",
+  "copy": "Copy",
+  "passwordCopied": "Password copied",
+  "copied": "Copied",
+  "copiedLabel": "{label} Copied",
+  "@copiedLabel": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  },
+
+  "strengthWeak": "Weak",
+  "strengthMedium": "Medium",
+  "strengthStrong": "Strong",
+  "strengthVeryStrong": "Very Strong",
+
+  "settings": "Settings",
+  "sectionSecurity": "Security",
+  "sectionPreferences": "Preferences",
+  "sectionDataManagement": "Data Management",
+  "sectionTools": "Tools",
+  "sectionAbout": "About",
+
+  "biometricSubtitleEnabled": "Quick unlock, no password needed",
+  "biometricSubtitleDisabled": "Biometrics not supported on this device",
+  "biometricEnabledMsg": "Face ID / Touch ID enabled",
+  "biometricDisabledMsg": "Biometrics disabled",
+  "biometricNotAvailable": "Device doesn't support biometrics or none enrolled\n(Simulator: Features → Face ID → Enrolled)",
+  "autoLock": "Auto Lock",
+  "autoLockSeconds": "{s}s",
+  "@autoLockSeconds": {
+    "placeholders": {
+      "s": { "type": "int" }
+    }
+  },
+  "changeMasterPassword": "Change Master Password",
+  "autoLockTimePicker": "Auto Lock Time",
+  "currentMasterPasswordHint": "Current master password",
+  "newMasterPasswordHint": "New master password (at least 6 chars)",
+  "enterCurrentMasterPasswordError": "Please enter current master password",
+  "enterNewPasswordError": "Please enter new password",
+  "atLeast6CharsError": "At least 6 characters",
+  "passwordsNotMatchError": "Passwords do not match",
+  "confirmNewMasterPasswordHint": "Confirm new master password",
+  "masterPasswordUpdated": "Master password updated",
+  "wrongCurrentPassword": "Wrong current password, please try again",
+
+  "clipboardAutoClear": "Clipboard Auto-Clear",
+  "clipboardClearAfter": "Clear {label} after copying password",
+  "@clipboardClearAfter": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  },
+  "clipboardClearTimePicker": "Clipboard Clear Time",
+
+  "backupExportSubject": "SafeKey Backup File",
+  "exportFailed": "Export failed: {error}",
+  "@exportFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "importSuccess": "Successfully restored {count} password records",
+  "@importSuccess": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "importFailed": "Import failed. Please verify the file format and master password",
+
+  "importModeTitle": "Choose Import Mode",
+  "importModeMessage": "Merge: Keep existing data and skip duplicate entries from the backup.\n\nReplace All: Delete all existing data and fully restore from the backup.",
+  "importModeMerge": "Merge",
+  "importModeReplace": "Replace All",
+  "importReplaceWarning": "This will permanently delete all existing passwords and cannot be undone. Continue?",
+  "exportBackup": "Export Backup",
+  "exportBackupSubtitle": "Export encrypted backup file (.skbak)",
+  "importRestore": "Import & Restore",
+  "importRestoreSubtitle": "Restore data from backup file",
+  "passwordGeneratorSubtitle": "Generate high-strength random passwords",
+
+  "aboutSafeKey": "About SafeKey",
+  "appVersionLine": "Version {version} (build {buildNumber})",
+  "@appVersionLine": {
+    "placeholders": {
+      "version": { "type": "String" },
+      "buildNumber": { "type": "String" }
+    }
+  },
+  "privacyPolicy": "Privacy Policy",
+  "privacyPolicySubtitle": "We collect no user data",
+  "aboutContent": "SafeKey is a fully offline password manager using AES-256-GCM encryption, no internet, no data collection. Your privacy and security are our only commitment.",
+  "close": "Close",
+  "privacyContent": "SafeKey does not collect, transmit or analyze any user data.\n\n• All password data is stored locally on your device\n• The app requires no network access permission\n• Data is encrypted with AES-256-GCM\n• The master password is never stored, only used to derive encryption keys\n• We cannot and will not access your data\n\nYour data belongs to you, and only you.",
+
+  "categorySocial": "Social",
+  "categoryFinance": "Finance",
+  "categoryShopping": "Shopping",
+  "categoryGame": "Gaming",
+  "categoryOther": "Other",
+
+  "language": "Language",
+
+  "followSystem": "Follow System",
+
+  "autoLockImmediate": "Immediately",
+  "autoLock1Min": "1 minute",
+  "autoLock5Min": "5 minutes",
+  "autoLock15Min": "15 minutes",
+  "clipboard15Sec": "15 sec",
+  "clipboard30Sec": "30 sec",
+  "clipboard1Min": "1 min",
+  "clipboardNever": "Never"
+}

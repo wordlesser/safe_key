@@ -1,0 +1,280 @@
+{
+  "@@locale": "zh",
+
+  "appName": "SafeKey",
+
+  "welcomeSlide1Title": "全离线加密存储",
+  "welcomeSlide1Subtitle": "所有数据使用 AES-256-GCM 加密，\n仅存储于您的设备本地，绝不联网",
+  "welcomeSlide2Title": "Face ID / Touch ID",
+  "welcomeSlide2Subtitle": "支持生物识别快速解锁，\n无需每次输入主密码",
+  "welcomeSlide3Title": "无需注册，无需联网",
+  "welcomeSlide3Subtitle": "您的数据只属于您自己，\nApp 不申请任何网络权限",
+  "getStarted": "开始使用",
+  "nextStep": "下一步",
+
+  "setupMasterPasswordTitle": "设置主密码",
+  "setupFailed": "设置失败，请重试",
+  "masterPasswordIsYourOnly": "主密码是您数据的唯一保障",
+  "masterPasswordWarning": "主密码无法找回，请务必牢记。建议使用包含大小写字母、数字和符号的组合。",
+  "masterPassword": "主密码",
+  "atLeast6CharsHint": "至少 6 位字符",
+  "enterMasterPasswordError": "请输入主密码",
+  "masterPasswordTooShortError": "主密码至少需要 6 位字符",
+  "confirmMasterPassword": "确认主密码",
+  "reEnterMasterPasswordHint": "再次输入主密码",
+  "confirmMasterPasswordError": "请确认主密码",
+  "passwordMismatchError": "两次输入的密码不一致",
+  "completeSetup": "完成设置",
+
+  "lockedOutMessage": "连续错误 {count} 次，已锁定 {minutes} 分钟",
+  "@lockedOutMessage": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "passwordWrongRemaining": "密码错误，还剩 {remaining} 次机会",
+  "@passwordWrongRemaining": {
+    "placeholders": {
+      "remaining": { "type": "int" }
+    }
+  },
+  "durationMinSec": "{m} 分 {s} 秒",
+  "@durationMinSec": {
+    "placeholders": {
+      "m": { "type": "int" },
+      "s": { "type": "int" }
+    }
+  },
+  "durationSec": "{s} 秒",
+  "@durationSec": {
+    "placeholders": {
+      "s": { "type": "int" }
+    }
+  },
+  "enterMasterPasswordToUnlock": "输入主密码解锁",
+  "failedAttemptsWarning": "已输错 {failed} 次，再错 {remaining} 次将锁定 30 分钟",
+  "@failedAttemptsWarning": {
+    "placeholders": {
+      "failed": { "type": "int" },
+      "remaining": { "type": "int" }
+    }
+  },
+  "unlock": "解锁",
+  "useFaceIdTouchId": "使用 Face ID / Touch ID",
+  "appLockedHint": "您的密码本已锁定",
+  "tapToUnlockBiometric": "轻触图标以解锁",
+  "verifying": "验证中…",
+  "usePasswordInstead": "使用密码登录",
+  "switchToFaceId": "改用 Face ID",
+  "biometricFailedHint": "已失败 {count} 次，再失败 {left} 次将切换到密码解锁",
+  "@biometricFailedHint": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "left": { "type": "int" }
+    }
+  },
+  "biometricFailedAutoSwitched": "Face ID 验证失败，已切换到密码解锁",
+  "accountLocked": "账户已锁定",
+  "accountLockedDesc": "连续输错密码超过 5 次，账户已临时锁定",
+  "remainingTime": "剩余 {time}",
+  "@remainingTime": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "addPasswordTooltip": "添加密码",
+  "searchHint": "搜索名称、账号、备注...",
+  "allCategories": "全部",
+  "copyUsername": "复制账号",
+  "copyPassword": "复制密码",
+  "edit": "编辑",
+  "delete": "删除",
+  "deleteConfirmTitle": "删除确认",
+  "deleteConfirmContent": "确定要删除「{name}」的密码记录吗？此操作无法撤销。",
+  "@deleteConfirmContent": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "deleteConfirmContentShort": "确定删除「{name}」吗？此操作无法撤销。",
+  "@deleteConfirmContentShort": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "cancel": "取消",
+  "deletedEntry": "已删除「{name}」",
+  "@deletedEntry": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "noMatchingPasswords": "未找到匹配的密码",
+  "noPasswordsYet": "还没有密码记录",
+  "tryOtherKeywords": "尝试其他关键词",
+  "tapPlusToAdd": "点击右下角 + 添加第一条密码",
+  "addPassword": "添加密码",
+
+  "editPassword": "编辑密码",
+  "save": "保存",
+  "savedEntry": "已保存「{name}」",
+  "@savedEntry": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "updatedEntry": "已更新「{name}」",
+  "@updatedEntry": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "saveFailed": "保存失败，请重试",
+  "nameLabel": "名称 *",
+  "nameHint": "如：微信、Gmail",
+  "nameRequired": "请输入名称",
+  "usernameLabel": "账号 / 用户名 *",
+  "usernameHint": "手机号、邮箱或用户名",
+  "usernameRequired": "请输入账号",
+  "passwordLabel": "密码 *",
+  "passwordHint": "输入或生成密码",
+  "generatorTooltip": "密码生成器",
+  "passwordRequired": "请输入密码",
+  "urlLabel": "网址（选填）",
+  "noteLabel": "备注（选填）",
+  "noteHint": "其他信息...",
+  "categoryLabel": "分类",
+
+  "editTooltip": "编辑",
+  "deleteTooltip": "删除",
+  "usernameFieldLabel": "账号",
+  "passwordFieldLabel": "密码",
+  "urlFieldLabel": "网址",
+  "noteFieldLabel": "备注",
+  "createdAt": "创建时间",
+  "updatedAt": "更新时间",
+
+  "passwordGenerator": "密码生成器",
+  "length": "长度",
+  "uppercase": "大写字母",
+  "lowercase": "小写字母",
+  "digits": "数字",
+  "specialChars": "特殊字符",
+  "regenerate": "重新生成",
+  "useThisPassword": "使用此密码",
+  "copy": "复制",
+  "passwordCopied": "密码已复制",
+  "copied": "已复制",
+  "copiedLabel": "{label} 已复制",
+  "@copiedLabel": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  },
+
+  "strengthWeak": "弱",
+  "strengthMedium": "中等",
+  "strengthStrong": "强",
+  "strengthVeryStrong": "非常强",
+
+  "settings": "设置",
+  "sectionSecurity": "安全",
+  "sectionPreferences": "偏好设置",
+  "sectionDataManagement": "数据管理",
+  "sectionTools": "工具",
+  "sectionAbout": "关于",
+
+  "biometricSubtitleEnabled": "快速解锁，无需输入密码",
+  "biometricSubtitleDisabled": "当前设备不支持生物识别",
+  "biometricEnabledMsg": "Face ID / Touch ID 已开启",
+  "biometricDisabledMsg": "生物识别已关闭",
+  "biometricNotAvailable": "当前设备不支持或未录入生物特征\n（模拟器请先执行 Features → Face ID → Enrolled）",
+  "autoLock": "自动锁定",
+  "autoLockSeconds": "{s} 秒",
+  "@autoLockSeconds": {
+    "placeholders": {
+      "s": { "type": "int" }
+    }
+  },
+  "changeMasterPassword": "修改主密码",
+  "autoLockTimePicker": "自动锁定时间",
+  "currentMasterPasswordHint": "当前主密码",
+  "newMasterPasswordHint": "新主密码（至少 6 位）",
+  "enterCurrentMasterPasswordError": "请输入当前主密码",
+  "enterNewPasswordError": "请输入新密码",
+  "atLeast6CharsError": "至少 6 位字符",
+  "passwordsNotMatchError": "两次密码不一致",
+  "confirmNewMasterPasswordHint": "确认新主密码",
+  "masterPasswordUpdated": "主密码已更新",
+  "wrongCurrentPassword": "原密码错误，请重试",
+
+  "clipboardAutoClear": "剪贴板自动清除",
+  "clipboardClearAfter": "复制密码后 {label} 清除",
+  "@clipboardClearAfter": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  },
+  "clipboardClearTimePicker": "剪贴板清除时间",
+
+  "backupExportSubject": "SafeKey 备份文件",
+  "exportFailed": "导出失败：{error}",
+  "@exportFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "importSuccess": "成功恢复 {count} 条密码记录",
+  "@importSuccess": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "importFailed": "导入失败，请确认文件格式正确且主密码匹配",
+
+  "importModeTitle": "选择导入方式",
+  "importModeMessage": "合并导入：保留现有数据，备份中重复条目将被跳过。\n\n清空恢复：删除所有现有数据，完全以备份文件恢复。",
+  "importModeMerge": "合并导入",
+  "importModeReplace": "清空恢复",
+  "importReplaceWarning": "此操作将删除所有现有密码，无法撤销，确定继续？",
+  "exportBackup": "导出备份",
+  "exportBackupSubtitle": "导出加密备份文件（.skbak）",
+  "importRestore": "导入恢复",
+  "importRestoreSubtitle": "从备份文件恢复数据",
+  "passwordGeneratorSubtitle": "生成高强度随机密码",
+
+  "aboutSafeKey": "关于 SafeKey",
+  "appVersionLine": "版本 {version}（构建 {buildNumber}）",
+  "@appVersionLine": {
+    "placeholders": {
+      "version": { "type": "String" },
+      "buildNumber": { "type": "String" }
+    }
+  },
+  "privacyPolicy": "隐私政策",
+  "privacyPolicySubtitle": "我们不收集任何用户数据",
+  "aboutContent": "SafeKey 是一款完全本地化的密码管理工具，采用 AES-256-GCM 加密，不联网，不收集任何数据。您的隐私和安全是我们的唯一承诺。",
+  "close": "关闭",
+  "privacyContent": "SafeKey 不收集、不传输、不分析任何用户数据。\n\n• 所有密码数据仅存储在您的设备本地\n• App 不申请网络访问权限\n• 数据使用 AES-256-GCM 加密存储\n• 主密码不以任何形式存储，仅用于派生加密密钥\n• 我们无法也不会访问您的数据\n\n您的数据属于您自己，仅此而已。",
+
+  "categorySocial": "社交",
+  "categoryFinance": "金融",
+  "categoryShopping": "购物",
+  "categoryGame": "游戏",
+  "categoryOther": "其他",
+
+  "language": "语言",
+
+  "followSystem": "跟随系统",
+
+  "autoLockImmediate": "立即",
+  "autoLock1Min": "1 分钟",
+  "autoLock5Min": "5 分钟",
+  "autoLock15Min": "15 分钟",
+  "clipboard15Sec": "15 秒",
+  "clipboard30Sec": "30 秒",
+  "clipboard1Min": "1 分钟",
+  "clipboardNever": "永不"
+}

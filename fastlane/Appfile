@@ -1,0 +1,4 @@
+app_identifier "com.safekey.safeKey"
+apple_dev_portal_id ENV["APPLE_ID"]
+itc_team_id        ENV["ITC_TEAM_ID"]    # App Store Connect Team ID（数字）
+team_id            ENV["APPLE_TEAM_ID"]  # Developer Portal Team ID

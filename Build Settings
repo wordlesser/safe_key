@@ -1,0 +1,6 @@
+// 确保以下设置：
+1. Build Settings → Code Signing Identity:
+   - Release: "Apple Distribution"
+   
+2. Build Settings → Provisioning Profile:
+   - Release: 选择正确的 Distribution Profile

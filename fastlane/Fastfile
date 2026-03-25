@@ -1,0 +1,240 @@
+require "bundler"
+require "digest/md5"
+require "fileutils"
+require "json"
+require "shellwords"
+
+default_platform(:ios)
+
+# ─── 读取 App Store Connect API Key ───────────────────────────────────────────
+# 优先使用环境变量，避免把密钥路径硬编码到脚本里
+def api_key
+  app_store_connect_api_key(
+    key_id:        ENV["ASC_KEY_ID"],
+    issuer_id:     ENV["ASC_ISSUER_ID"],
+    key_filepath:  ENV["ASC_KEY_PATH"],   # .p8 文件的绝对路径
+    duration:      1200,
+    in_house:      false
+  )
+end
+
+platform :ios do
+
+  # ─── 1. 仅构建 IPA ─────────────────────────────────────────────────────────
+  desc "Build Flutter release IPA"
+  lane :build do
+    flutter_build
+  end
+
+  # ─── 2. 上传到 TestFlight（内测） ──────────────────────────────────────────
+  desc "Build and upload to TestFlight"
+  lane :beta do
+    flutter_build
+    upload_to_testflight(
+      api_key:            api_key,
+      ipa:                ipa_path,
+      skip_waiting_for_build_processing: true,
+      changelog:          "内部测试版"
+    )
+    UI.success "✅ 已上传至 TestFlight！"
+  end
+
+  # ─── 3. 提交 App Store 审核 ────────────────────────────────────────────────
+  desc "Build and submit to App Store for review"
+  lane :release do
+    flutter_build
+    upload_to_app_store(
+      api_key:             api_key,
+      ipa:                 ipa_path,
+      force:               true,   # 覆盖已上传的截图/元数据（若不需要可改 false）
+      submit_for_review:   true,   # 上传后自动提交审核
+      automatic_release:   false,  # 审核通过后手动发布（改 true 则自动上线）
+      skip_screenshots:    true,   # 不上传截图（在 App Store Connect 里手动管理）
+      skip_metadata:       true,   # 不上传元数据（在 App Store Connect 里手动管理）
+      precheck_include_in_app_purchases: false
+    )
+    UI.success "✅ 已提交 App Store 审核！"
+  end
+
+  # ─── 4. 仅上传（不提交审核） ───────────────────────────────────────────────
+  desc "Build and upload to App Store Connect (no review submission)"
+  lane :upload do
+    flutter_build
+    upload_to_app_store(
+      api_key:           api_key,
+      ipa:               ipa_path,
+      force:             true,
+      submit_for_review: false,
+      skip_screenshots:  true,
+      skip_metadata:     true,
+      precheck_include_in_app_purchases: false
+    )
+    UI.success "✅ 已上传至 App Store Connect！"
+  end
+
+  # ─── 仅上传：使用已有 IPA（build/ios/ipa/*.ipa），不再执行 flutter_build ───
+  desc "Upload existing IPA to TestFlight (no rebuild)"
+  lane :beta_only do
+    upload_to_testflight(
+      api_key:            api_key,
+      ipa:                ipa_path,
+      skip_waiting_for_build_processing: true,
+      changelog:          "内部测试版"
+    )
+    UI.success "✅ 已上传至 TestFlight！"
+  end
+
+  desc "Upload existing IPA to App Store Connect (no rebuild, no review)"
+  lane :upload_only do
+    upload_to_app_store(
+      api_key:           api_key,
+      ipa:               ipa_path,
+      force:             true,
+      submit_for_review: false,
+      skip_screenshots:  true,
+      skip_metadata:     true,
+      precheck_include_in_app_purchases: false
+    )
+    UI.success "✅ 已上传至 App Store Connect！"
+  end
+
+  desc "Upload existing IPA and submit for review (no rebuild)"
+  lane :release_only do
+    upload_to_app_store(
+      api_key:             api_key,
+      ipa:                 ipa_path,
+      force:               true,
+      submit_for_review:   true,
+      automatic_release:   false,
+      skip_screenshots:    true,
+      skip_metadata:       true,
+      precheck_include_in_app_purchases: false
+    )
+    UI.success "✅ 已提交 App Store 审核！"
+  end
+
+  # ─── 错误处理 ──────────────────────────────────────────────────────────────
+  error do |lane, exception|
+    UI.error "❌ Lane [#{lane}] 失败：#{exception.message}"
+  end
+end
+
+# ─── 私有方法 ─────────────────────────────────────────────────────────────────
+
+# Flutter / xcodebuild 子命令：保证 Homebrew 的 bin 在 PATH 前面。
+def sh_flutter(cmd)
+  segments = []
+  segments << "/opt/homebrew/bin" if File.directory?("/opt/homebrew/bin")
+  segments << "/usr/local/bin" if File.directory?("/usr/local/bin")
+  path = (segments + [ENV.fetch("PATH", "")]).compact.join(File::PATH_SEPARATOR)
+  prefix = "export PATH=#{Shellwords.shellescape(path)} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 && "
+  sh("#{prefix}#{cmd}")
+end
+
+# `bundle exec fastlane` 会带上 Bundler 的 GEM_HOME / RUBYOPT 等，Homebrew 的 `pod` 会被当成「必须在 Gemfile 里声明
+# cocoapods」而报错。pod install 必须在「无 Bundler 注入」的环境下跑。
+def sh_pod_install(project_root_path)
+  ios_dir = File.join(project_root_path, "ios")
+  Bundler.with_unbundled_env do
+    segments = []
+    segments << "/opt/homebrew/bin" if File.directory?("/opt/homebrew/bin")
+    segments << "/usr/local/bin" if File.directory?("/usr/local/bin")
+    ENV["PATH"] = (segments + [ENV.fetch("PATH", "")]).compact.join(File::PATH_SEPARATOR)
+    ENV["LANG"] = "en_US.UTF-8"
+    ENV["LC_ALL"] = "en_US.UTF-8"
+    sh("cd #{Shellwords.shellescape(ios_dir)} && pod install")
+  end
+end
+
+# Flutter tools 在「依赖有变化」时会跑 pod --version（子进程只带 LANG、无 PATH，易误判 CocoaPods 损坏）。
+# 与 cocoapod_utils Fingerprinter 一致地写入 build/ios/pod_inputs.fingerprint，让 processPodsIfNeeded 跳过该检查。
+# 参考：flutter_tools lib/src/macos/cocoapod_utils.dart、lib/src/base/fingerprint.dart
+def write_ios_pod_inputs_fingerprint(root)
+  ios = File.join(root, "ios")
+  sdk = if ENV["FLUTTER_ROOT"] && !ENV["FLUTTER_ROOT"].strip.empty?
+          ENV["FLUTTER_ROOT"].strip
+        else
+          wf = `which flutter 2>/dev/null`.strip
+          UI.user_error!("未找到 flutter，无法生成 pod fingerprint") if wf.empty?
+          File.expand_path("../..", wf)
+        end
+  paths = []
+  paths << File.expand_path(File.join(ios, "Runner.xcodeproj", "project.pbxproj"))
+  paths << File.expand_path(File.join(ios, "Podfile"))
+  paths << File.expand_path(File.join(sdk, "packages", "flutter_tools", "bin", "podhelper.rb"))
+  spm = File.expand_path(File.join(ios, "Flutter", "ephemeral", "Packages", "FlutterGeneratedPluginSwiftPackage", "Package.swift"))
+  paths << spm if File.file?(spm)
+  paths.each do |p|
+    UI.user_error!("缺少 fingerprint 输入文件: #{p}") unless File.file?(p)
+  end
+  checksums = paths.to_h { |p| [p, Digest::MD5.file(p).hexdigest] }
+  out = File.join(root, "build", "ios", "pod_inputs.fingerprint")
+  FileUtils.mkdir_p(File.dirname(out))
+  File.write(out, JSON.generate("files" => checksums))
+end
+
+def flutter_build
+  root = Shellwords.shellescape(project_root)
+  plist_q = Shellwords.shellescape(export_options_path)
+
+  extra = []
+  bn = ENV["FLUTTER_BUILD_NAME"].to_s.strip
+  extra << "--build-name=#{Shellwords.shellescape(bn)}" unless bn.empty?
+  bnum = ENV["FLUTTER_BUILD_NUMBER"].to_s.strip
+  extra << "--build-number=#{Shellwords.shellescape(bnum)}" unless bnum.empty?
+  extra_s = extra.empty? ? "" : " #{extra.join(" ")}"
+
+  # 1. 先 clean 再 pub get：clean 会删掉 ios/Flutter/Generated.xcconfig，须在 pod install 之前由 pub get 重新生成
+  sh_flutter("cd #{root} && flutter clean")
+  sh_flutter("cd #{root} && flutter pub get")
+  sh_flutter("cd #{root} && flutter gen-l10n")
+
+  # 2. CocoaPods（必须脱离 bundle exec 环境，见 sh_pod_install）
+  sh_pod_install(project_root)
+
+  # 2b. 让 flutter build ios 认为 pod 输入未变，避免触发有问题的 pod --version 检测
+  write_ios_pod_inputs_fingerprint(project_root)
+
+  # 3. 仅编译 iOS（不跑 flutter build ipa）
+  sh_flutter("cd #{root} && flutter build ios --release#{extra_s}")
+
+  # 4. 清空旧产物
+  ipa_export_dir = File.join(project_root, "build/ios/ipa")
+  archive_path = File.join(project_root, "build/ios/archive/Runner.xcarchive")
+  FileUtils.rm_rf(File.dirname(archive_path))
+  FileUtils.mkdir_p(File.dirname(archive_path))
+  FileUtils.rm_rf(ipa_export_dir)
+  FileUtils.mkdir_p(ipa_export_dir)
+
+  # 5. Archive + 导出 IPA（与 ExportOptions.plist / Xcode 签名一致）
+  sh_flutter(
+    "cd #{root} && xcodebuild " \
+      "-workspace ios/Runner.xcworkspace " \
+      "-scheme Runner " \
+      "-configuration Release " \
+      "-sdk iphoneos " \
+      "-destination 'generic/platform=iOS' " \
+      "archive " \
+      "-archivePath build/ios/archive/Runner.xcarchive"
+  )
+  sh_flutter(
+    "cd #{root} && xcodebuild -exportArchive " \
+      "-archivePath build/ios/archive/Runner.xcarchive " \
+      "-exportOptionsPlist #{plist_q} " \
+      "-exportPath build/ios/ipa " \
+      "-allowProvisioningUpdates"
+  )
+end
+
+def project_root
+  File.expand_path("../../", __FILE__)
+end
+
+def ipa_path
+  Dir.glob("#{project_root}/build/ios/ipa/*.ipa").first ||
+    UI.user_error!("找不到 IPA 文件，请先运行 build lane")
+end
+
+def export_options_path
+  "#{project_root}/ios/ExportOptions.plist"
+end
